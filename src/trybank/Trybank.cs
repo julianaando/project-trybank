@@ -62,10 +62,6 @@ public class TrybankLib
     }
 
     // 3. Construa a funcionalidade de fazer Logout
-    /* O estado de pessoa usuária logada é controlado pela variável Logged. Se não houver uma pessoa 
-    usuária logada, você deverá lançar uma exceção do tipo AccessViolationException com a mensagem 
-    Usuário não está logado. Caso contrário, a função deve alterar o estado da variável Logged e o 
-    índice de pessoa usuária loggedUser de volta para -99*/
     public void Logout()
     {
         if (!Logged) {
@@ -79,7 +75,11 @@ public class TrybankLib
     // 4. Construa a funcionalidade de checar o saldo
     public int CheckBalance()
     {
-        throw new NotImplementedException();   
+        if (!Logged) {
+            throw new AccessViolationException("Usuário não está logado");
+        } else {
+            return Bank[loggedUser, 3];
+        }
     }
 
     // 5. Construa a funcionalidade de depositar dinheiro
